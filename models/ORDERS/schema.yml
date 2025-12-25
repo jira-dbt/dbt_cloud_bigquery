@@ -1,0 +1,21 @@
+version: 2
+
+sources:
+  - name: bigquery_source
+    schema: staging
+
+    tables:
+        - name: orders
+
+models:
+    - name: transformed_orders.sql
+      description: "Orders tranformed table"
+      columns:
+          - name: order_id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+      config:
+          materialized: table
+          alias: order_rpt
